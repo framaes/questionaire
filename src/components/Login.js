@@ -22,8 +22,10 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.get(`http://localhost:8080/users/${username}`).then((response) => {
-            if(response.data.length == 1 && response.data[0].username === username){
-                navigate('/Questionaire')
+            if(response.data.length === 1 && response.data[0].username === username){
+                navigate('/Questionaire',{state:{
+                    "id":response.data[0].id
+                }})
             }else{
                 setLogin(false)
             }
